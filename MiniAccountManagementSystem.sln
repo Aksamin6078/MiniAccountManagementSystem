@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35323.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAccountManagementSystem", "MiniAccountManagementSystem\MiniAccountManagementSystem.csproj", "{79C132EA-403B-4968-995E-18A29D4B8C04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79C132EA-403B-4968-995E-18A29D4B8C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C132EA-403B-4968-995E-18A29D4B8C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C132EA-403B-4968-995E-18A29D4B8C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C132EA-403B-4968-995E-18A29D4B8C04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73D02333-F229-42C9-8DF5-6D9DF47DE551}
+	EndGlobalSection
+EndGlobal

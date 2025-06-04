@@ -1,0 +1,61 @@
+﻿@page
+@model MiniAccountManagementSystem.Pages.Accounts.CreateModel
+@{
+    ViewData["Title"] = "Create New Account";
+}
+
+<h1>Create New Account</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Account.AccountName" class="control-label"></label>
+                <input asp-for="Account.AccountName" class="form-control" />
+                <span asp-validation-for="Account.AccountName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Account.AccountNumber" class="control-label"></label>
+                <input asp-for="Account.AccountNumber" class="form-control" />
+                <span asp-validation-for="Account.AccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Account.AccountType" class="control-label"></label>
+                <select asp-for="Account.AccountType" asp-items="Model.AccountTypes" class="form-control">
+                    <option value="">-- Select Account Type --</option>
+                </select>
+                <span asp-validation-for="Account.AccountType" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Account.ParentAccountId" class="control-label"></label>
+                <select asp-for="Account.ParentAccountId" asp-items="Model.ParentAccounts" class="form-control">
+                    <option value="">-- No Parent (Top-Level Account) --</option>
+                </select>
+                <span asp-validation-for="Account.ParentAccountId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Account.IsActive" /> @Html.DisplayNameFor(model => model.Account.IsActive)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

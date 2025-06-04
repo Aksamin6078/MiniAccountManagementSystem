@@ -1,0 +1,62 @@
+﻿@page
+@model MiniAccountManagementSystem.Pages.Accounts.IndexModel
+@{
+    ViewData["Title"] = "Chart of Accounts";
+}
+
+<h1>Chart of Accounts</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Account</a>
+</p>
+
+@if (Model.Accounts == null || !Model.Accounts.Any())
+{
+    <div class="alert alert-info">
+        No accounts found. Please create a new account.
+    </div>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].AccountName)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].AccountNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].AccountType)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].ParentAccountName)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].IsActive)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].CreatedAt)</th>
+                <th>@Html.DisplayNameFor(model => model.Accounts[0].UpdatedAt)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Accounts)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.AccountName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AccountNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AccountType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ParentAccountName)</td>
+                    <td>@(item.IsActive ? "Yes" : "No")</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@item.AccountId" class="btn btn-sm btn-warning">Edit</a> |
+                        <a asp-page="Details" asp-route-id="@item.AccountId" class="btn btn-sm btn-info">Details</a> |
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@item.AccountId" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

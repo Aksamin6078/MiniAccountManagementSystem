@@ -1,0 +1,109 @@
+﻿@page
+@model MiniAccountManagementSystem.Pages.Vouchers.IndexModel
+
+@{
+    ViewData["Title"] = "Vouchers List";
+}
+
+<h1>Vouchers List</h1>
+
+<hr />
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Voucher</a>
+</p>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].VoucherNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].VoucherType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].VoucherDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].TotalDebit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].TotalCredit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].CreatedByUserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vouchers[0].CreatedAt)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Vouchers == null || !Model.Vouchers.Any())
+            {
+                <tr>
+                    <td colspan="9" class="text-center">No vouchers found.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Vouchers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VoucherNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VoucherType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VoucherDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalDebit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCredit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedByUserId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                        </td>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.VoucherId" class="btn btn-info btn-sm">Details</a> |
+                            <a asp-page="./Edit" asp-route-id="@item.VoucherId" class="btn btn-warning btn-sm">Edit</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.VoucherId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

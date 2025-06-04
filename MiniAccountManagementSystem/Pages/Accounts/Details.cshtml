@@ -1,0 +1,73 @@
+﻿@page "{id:int}" 
+@model MiniAccountManagementSystem.Pages.Accounts.DetailsModel
+
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<h1>Account Details</h1>
+
+<div>
+    <h4>Account</h4>
+    <hr />
+    @if (Model.Account == null)
+    {
+        <div class="alert alert-warning">
+            Account not found.
+        </div>
+    }
+    else
+    {
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.AccountName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.AccountName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.AccountNumber)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.AccountNumber)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.AccountType)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.AccountType)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.ParentAccountName) @* Using ParentAccountName for display *@
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.ParentAccountName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.IsActive)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.Account.IsActive ? "Yes" : "No")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.CreatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.CreatedAt)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Account.UpdatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Account.UpdatedAt)
+            </dd>
+        </dl>
+    }
+</div>
+<div>
+    @if (Model.Account != null)
+    {
+        <a asp-page="Edit" asp-route-id="@Model.Account.AccountId" class="btn btn-warning">Edit</a>
+    }
+    <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+</div>

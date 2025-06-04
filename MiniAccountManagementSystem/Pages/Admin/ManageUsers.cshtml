@@ -1,0 +1,104 @@
+﻿@page
+@model MiniAccountManagementSystem.Pages.Admin.ManageUsersModel
+
+@{
+    ViewData["Title"] = "Manage Users and Roles";
+}
+
+<div class="container bg-white p-4 rounded shadow-sm">
+    <h1 class="mb-4 text-primary">@ViewData["Title"]</h1>
+    <hr />
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <h2 class="h4 mb-3">Assign Role to User</h2>
+    <form method="post" asp-page-handler="AssignRole">
+        <div class="row g-3 mb-4 align-items-end">
+            <div class="col-md-5">
+                <label for="SelectedUserId" class="form-label">Select User</label>
+                <select asp-for="SelectedUserId" class="form-select" required>
+                    <option value="">-- Select a User --</option>
+                    @foreach (var user in Model.Users)
+                    {
+                        <option value="@user.Id">@user.Email (@user.UserName)</option>
+                    }
+                </select>
+                <span asp-validation-for="SelectedUserId" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label for="SelectedRole" class="form-label">Select Role</label>
+                <select asp-for="SelectedRole" class="form-select" required>
+                    <option value="">-- Select a Role --</option>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role">@role</option>
+                    }
+                </select>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">Assign Role</button>
+            </div>
+        </div>
+    </form>
+
+    <h2 class="h4 mb-3 mt-5">Current Users and Their Roles</h2>
+    @if (Model.Users == null || !Model.Users.Any())
+    {
+        <div class="alert alert-info text-center py-3" role="alert">
+            No users found.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover align-middle">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @if (user.Roles != null && user.Roles.Any())
+                                {
+                                    @string.Join(", ", user.Roles)
+                                }
+                                else
+                                {
+                                    <em>No roles assigned</em>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
